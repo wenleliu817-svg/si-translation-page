@@ -438,8 +438,6 @@ async function startTranslation() {
   debug('WS URL 已构建');
 
   setUIState('connecting');
-  document.getElementById('overlayText').textContent = '正在连接有道同传服务...';
-  document.getElementById('overlay').classList.add('active');
 
   try {
     ws = new WebSocket(wsUrl);
@@ -448,7 +446,6 @@ async function startTranslation() {
     ws.onopen = function() {
       debug('WebSocket 已连接');
       setStatus('running', '已连接，等待 3 秒后开始发送音频...');
-      document.getElementById('overlayText').textContent = '正在传输音频并等待识别...';
       isRunning = true;
 
       // Wait 3s then send audio
@@ -476,7 +473,6 @@ async function startTranslation() {
       debug('WebSocket 关闭: code=' + event.code + ' reason=' + event.reason);
       if (isRunning) {
         setStatus('done', '同传完成');
-        document.getElementById('overlay').classList.remove('active');
         document.getElementById('btnDownload').disabled = (fullTranscript.length === 0);
         resetUIState();
       }
@@ -531,7 +527,6 @@ async function sendAudioChunks() {
     ws.send(JSON.stringify({ end: true }));
     debug('已发送结束标记');
     setStatus('running', '音频发送完毕，等待识别结果...');
-    document.getElementById('overlay').classList.remove('active');
   }
 }
 
@@ -758,14 +753,12 @@ function setUIState(state) {
 
 function resetUIState() {
   setUIState('idle');
-  document.getElementById('overlay').classList.remove('active');
 }
 
 function resetState() {
   isRunning = false;
   ws = null;
   setUIState('idle');
-  document.getElementById('overlay').classList.remove('active');
   document.getElementById('btnDownload').disabled = (fullTranscript.length === 0);
 }
 
