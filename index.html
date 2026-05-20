@@ -28,178 +28,72 @@
     line-height: 1.6;
   }
 
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 24px 20px;
-  }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
 
-  header {
-    text-align: center;
-    padding: 32px 0 24px;
-  }
+  header { text-align: center; padding: 32px 0 24px; }
   header h1 {
-    font-size: 28px;
-    font-weight: 700;
+    font-size: 28px; font-weight: 700;
     background: linear-gradient(135deg, var(--primary), #8b5cf6);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
   }
-  header p {
-    color: var(--text-muted);
-    margin-top: 6px;
-    font-size: 14px;
-  }
+  header p { color: var(--text-muted); margin-top: 6px; font-size: 14px; }
 
-  .card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    margin-bottom: 20px;
-  }
-  .card-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 20px; }
+  .card-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
   .card-title .icon { font-size: 20px; }
 
-  .form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
   .form-group { display: flex; flex-direction: column; gap: 6px; }
   .form-group.full { grid-column: 1 / -1; }
-  .form-group label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-muted);
-  }
-  .form-group input, .form-group select, .form-group textarea {
-    padding: 10px 14px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    background: var(--bg);
-    color: var(--text);
-    font-size: 14px;
-    font-family: inherit;
+  .form-group label { font-size: 13px; font-weight: 500; color: var(--text-muted); }
+  .form-group input, .form-group select {
+    padding: 10px 14px; border: 1px solid var(--border); border-radius: 8px;
+    background: var(--bg); color: var(--text); font-size: 14px; font-family: inherit;
     transition: border-color 0.2s;
   }
-  .form-group input:focus, .form-group select:focus {
-    outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
-  }
-  .form-group input:disabled, .form-group select:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+  .form-group input:focus, .form-group select:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(59,130,246,0.15); }
+  .form-group input:disabled, .form-group select:disabled { opacity: 0.5; cursor: not-allowed; }
 
-  .lang-selector {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
+  .lang-selector { display: flex; gap: 8px; flex-wrap: wrap; }
   .lang-chip {
-    padding: 8px 18px;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    background: var(--bg);
-    color: var(--text-muted);
-    cursor: pointer;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.2s;
-    user-select: none;
+    padding: 8px 18px; border: 1px solid var(--border); border-radius: 20px;
+    background: var(--bg); color: var(--text-muted); cursor: pointer;
+    font-size: 13px; font-weight: 500; transition: all 0.2s; user-select: none;
   }
   .lang-chip:hover { border-color: var(--primary); color: var(--text); }
-  .lang-chip.active {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-  }
+  .lang-chip.active { background: var(--primary); border-color: var(--primary); color: #fff; }
 
-  .file-upload {
-    position: relative;
-  }
-  .file-upload input[type="file"] {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    cursor: pointer;
-  }
+  .file-upload { position: relative; }
+  .file-upload input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
   .file-upload-area {
-    border: 2px dashed var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    text-align: center;
-    transition: all 0.2s;
-    cursor: pointer;
+    border: 2px dashed var(--border); border-radius: var(--radius); padding: 28px;
+    text-align: center; transition: all 0.2s; cursor: pointer;
   }
-  .file-upload-area:hover, .file-upload-area.has-file {
-    border-color: var(--primary);
-    background: rgba(59,130,246,0.05);
-  }
+  .file-upload-area:hover, .file-upload-area.has-file { border-color: var(--primary); background: rgba(59,130,246,0.05); }
   .file-upload-area .upload-icon { font-size: 36px; margin-bottom: 8px; }
   .file-upload-area .upload-text { color: var(--text-muted); font-size: 13px; }
-  .file-upload-area .file-name {
-    color: var(--primary);
-    font-weight: 500;
-    margin-top: 4px;
-    font-size: 13px;
-  }
+  .file-upload-area .file-name { color: var(--primary); font-weight: 500; margin-top: 4px; font-size: 13px; }
   .file-upload-area .file-size { color: var(--text-muted); font-size: 12px; }
 
   .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 10px 24px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-family: inherit;
+    display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+    padding: 10px 24px; border: none; border-radius: 8px; font-size: 14px;
+    font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit;
   }
   .btn:disabled { opacity: 0.5; cursor: not-allowed; }
   .btn-primary { background: var(--primary); color: #fff; }
   .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
-  .btn-secondary {
-    background: transparent;
-    border: 1px solid var(--border);
-    color: var(--text);
-  }
+  .btn-secondary { background: transparent; border: 1px solid var(--border); color: var(--text); }
   .btn-secondary:hover:not(:disabled) { background: var(--border); }
   .btn-success { background: var(--success); color: #000; }
   .btn-success:hover:not(:disabled) { opacity: 0.85; }
   .btn-danger { background: var(--danger); color: #fff; }
 
-  .btn-row {
-    display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 20px;
-  }
+  .btn-row { display: flex; gap: 12px; justify-content: center; margin-top: 20px; }
 
-  /* Status */
   .status-bar {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 500;
-    margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px; padding: 10px 16px;
+    border-radius: 8px; font-size: 13px; font-weight: 500; margin-bottom: 16px;
   }
   .status-bar.idle { background: var(--border); color: var(--text-muted); }
   .status-bar.connecting { background: rgba(245,158,11,0.15); color: var(--warning); }
@@ -208,110 +102,67 @@
   .status-bar.error { background: rgba(239,68,68,0.15); color: var(--danger); }
 
   .spinner {
-    display: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid currentColor;
-    border-top-color: transparent;
-    border-radius: 50%;
-    animation: spin 0.6s linear infinite;
+    display: none; width: 16px; height: 16px; border: 2px solid currentColor;
+    border-top-color: transparent; border-radius: 50%; animation: spin 0.6s linear infinite;
   }
   .status-bar.running .spinner, .status-bar.connecting .spinner { display: inline-block; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* Results */
   .results-container {
-    max-height: 500px;
-    overflow-y: auto;
-    border-radius: var(--radius);
-    background: var(--bg);
-    border: 1px solid var(--border);
-    padding: 12px;
+    max-height: 500px; overflow-y: auto; border-radius: var(--radius);
+    background: var(--bg); border: 1px solid var(--border); padding: 12px;
   }
   .result-item {
-    display: flex;
-    gap: 12px;
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
-    align-items: flex-start;
-    animation: fadeIn 0.3s ease;
+    display: flex; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--border);
+    align-items: flex-start; animation: fadeIn 0.3s ease;
   }
   .result-item:last-child { border-bottom: none; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-  .result-col {
-    flex: 1;
-    min-width: 0;
-  }
-  .result-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
-  }
+  .result-col { flex: 1; min-width: 0; }
+  .result-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
   .result-label.src { color: var(--primary); }
   .result-label.tgt { color: var(--success); }
   .result-text {
-    font-size: 14px;
-    line-height: 1.5;
-    word-break: break-word;
+    font-size: 14px; line-height: 1.5; word-break: break-word;
+    white-space: pre-wrap;
   }
   .result-text.pending { color: var(--text-muted); font-style: italic; }
 
-  .empty-state {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--text-muted);
-    font-size: 14px;
-  }
+  /* Stable (final) results get a border highlight */
+  .result-item.stable { border-left: 3px solid var(--success); padding-left: 9px; }
+
+  .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); font-size: 14px; }
   .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
 
-  /* Loading overlay */
   .overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(15,23,42,0.8);
-    z-index: 100;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
+    display: none; position: fixed; inset: 0; background: rgba(15,23,42,0.8);
+    z-index: 100; align-items: center; justify-content: center; flex-direction: column; gap: 16px;
   }
   .overlay.active { display: flex; }
   .overlay .loader {
-    width: 40px;
-    height: 40px;
-    border: 3px solid var(--border);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
+    width: 40px; height: 40px; border: 3px solid var(--border);
+    border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite;
   }
   .overlay .text { color: var(--text-muted); font-size: 14px; }
 
-  /* Toast */
   .toast {
-    position: fixed;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    z-index: 200;
-    animation: slideDown 0.3s ease;
-    display: none;
+    position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+    padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500;
+    z-index: 200; animation: slideDown 0.3s ease; display: none;
   }
   .toast.show { display: block; }
   .toast.success { background: var(--success); color: #000; }
   .toast.error { background: var(--danger); color: #fff; }
   @keyframes slideDown { from { opacity: 0; transform: translateX(-50%) translateY(-20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
 
-  /* Hidden audio playback for testing */
   .audio-preview { margin-top: 8px; }
   .audio-preview audio { width: 100%; margin-top: 6px; }
+
+  /* Debug panel */
+  .debug-info { margin-top: 12px; padding: 10px; background: var(--bg); border-radius: 8px; font-family: monospace; font-size: 11px; color: var(--text-muted); max-height: 120px; overflow-y: auto; display: none; }
+  .debug-info.show { display: block; }
+  .debug-info div { margin: 2px 0; }
 
   @media (max-width: 640px) {
     .form-grid { grid-template-columns: 1fr; }
@@ -366,6 +217,7 @@
       </div>
     </div>
     <div class="audio-preview" id="audioPreview" style="display:none"></div>
+    <div class="debug-info" id="debugLog"></div>
   </div>
 
   <!-- Actions -->
@@ -414,35 +266,39 @@
 let ws = null;
 let isRunning = false;
 let audioFile = null;
-let fileBuffer = null;
-let fullTranscript = [];
-let resultItems = [];
+let pcmBuffer = null;       // PCM 16kHz 16bit mono data ready to send
+let fullTranscript = [];     // stable results for download
+let resultItems = [];        // all displayed items (for tracking by segId)
 let langPair = 'ja,zh-CHS';
-let stats = { startedAt: null, segments: 0, bytesSent: 0 };
+let debugLines = [];
+
+function debug(msg) {
+  console.log('[SI]', msg);
+  debugLines.push(new Date().toLocaleTimeString() + ' ' + msg);
+  if (debugLines.length > 50) debugLines.shift();
+  var el = document.getElementById('debugLog');
+  el.innerHTML = debugLines.map(function(l) { return '<div>' + escapeHtml(l) + '</div>'; }).join('');
+  el.classList.add('show');
+}
 
 // ========== 初始化 ==========
-document.addEventListener('DOMContentLoaded', () => {
-  const langChips = document.querySelectorAll('.lang-chip');
-  langChips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      langChips.forEach(c => c.classList.remove('active'));
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.lang-chip').forEach(function(chip) {
+    chip.addEventListener('click', function() {
+      document.querySelectorAll('.lang-chip').forEach(function(c) { c.classList.remove('active'); });
       chip.classList.add('active');
       langPair = chip.dataset.lang;
+      debug('语种切换: ' + langPair);
     });
   });
 
-  const fileInput = document.getElementById('audioFile');
+  var fileInput = document.getElementById('audioFile');
   fileInput.addEventListener('change', handleFileSelect);
 
-  const uploadArea = document.getElementById('uploadArea');
-  uploadArea.addEventListener('dragover', e => {
-    e.preventDefault();
-    uploadArea.style.borderColor = 'var(--primary)';
-  });
-  uploadArea.addEventListener('dragleave', () => {
-    uploadArea.style.borderColor = 'var(--border)';
-  });
-  uploadArea.addEventListener('drop', e => {
+  var uploadArea = document.getElementById('uploadArea');
+  uploadArea.addEventListener('dragover', function(e) { e.preventDefault(); uploadArea.style.borderColor = 'var(--primary)'; });
+  uploadArea.addEventListener('dragleave', function() { uploadArea.style.borderColor = 'var(--border)'; });
+  uploadArea.addEventListener('drop', function(e) {
     e.preventDefault();
     uploadArea.style.borderColor = 'var(--border)';
     if (e.dataTransfer.files.length > 0) {
@@ -452,37 +308,79 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// ========== 文件选择 ==========
+// ========== 文件选择 + PCM 解码 ==========
 function handleFileSelect(e) {
-  const file = e.target.files[0];
+  var file = e.target.files[0];
   if (!file) return;
 
-  const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/x-wav', 'audio/wave'];
-  const validExts = ['.mp3', '.wav'];
-
-  const ext = '.' + file.name.split('.').pop().toLowerCase();
-  if (!validTypes.includes(file.type) && !validExts.includes(ext)) {
+  var ext = '.' + file.name.split('.').pop().toLowerCase();
+  var validExts = ['.mp3', '.wav'];
+  if (validExts.indexOf(ext) === -1) {
     showToast('请选择 MP3 或 WAV 格式的音频文件', 'error');
     return;
   }
 
   audioFile = file;
+  document.getElementById('fileName').textContent = file.name;
+  document.getElementById('fileName').style.display = 'block';
+  document.getElementById('fileSize').textContent = formatSize(file.size);
+  document.getElementById('fileSize').style.display = 'block';
+  document.getElementById('uploadArea').classList.add('has-file');
 
-  // 读取为 ArrayBuffer
-  const reader = new FileReader();
-  reader.onload = () => {
-    fileBuffer = new Uint8Array(reader.result);
-    document.getElementById('fileName').textContent = file.name;
-    document.getElementById('fileName').style.display = 'block';
-    document.getElementById('fileSize').textContent = formatSize(file.size);
-    document.getElementById('fileSize').style.display = 'block';
-    document.getElementById('uploadArea').classList.add('has-file');
+  // Audio preview
+  var preview = document.getElementById('audioPreview');
+  preview.style.display = 'block';
+  var blobUrl = URL.createObjectURL(file);
+  preview.innerHTML = '<audio controls src="' + blobUrl + '"></audio>';
 
-    // 音频预览
-    const preview = document.getElementById('audioPreview');
-    preview.style.display = 'block';
-    const blobUrl = URL.createObjectURL(file);
-    preview.innerHTML = `<audio controls src="${blobUrl}"></audio>`;
+  debug('文件已选择: ' + file.name + ' (' + formatSize(file.size) + ')');
+
+  // Decode to PCM 16kHz 16bit mono
+  decodeToPCM(file);
+}
+
+function decodeToPCM(file) {
+  debug('开始解码音频到 PCM 16kHz mono...');
+  var reader = new FileReader();
+  reader.onload = function() {
+    var arrayBuffer = reader.result;
+    var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    audioCtx.decodeAudioData(arrayBuffer).then(function(audioBuffer) {
+      debug('解码成功: ' + audioBuffer.sampleRate + 'Hz, ' + audioBuffer.numberOfChannels + 'ch, ' + audioBuffer.duration.toFixed(1) + 's');
+
+      // Resample to 16kHz mono using offline context
+      var offlineCtx = new OfflineAudioContext(1, Math.ceil(audioBuffer.duration * 16000), 16000);
+      var source = offlineCtx.createBufferSource();
+      source.buffer = audioBuffer;
+      source.connect(offlineCtx.destination);
+      source.start(0);
+
+      offlineCtx.startRendering().then(function(renderedBuffer) {
+        var channelData = renderedBuffer.getChannelData(0);
+        // Convert Float32 (-1..1) to Int16 PCM
+        var length = channelData.length;
+        pcmBuffer = new ArrayBuffer(length * 2);
+        var view = new DataView(pcmBuffer);
+        for (var i = 0; i < length; i++) {
+          var sample = Math.max(-1, Math.min(1, channelData[i]));
+          var intSample = sample < 0 ? sample * 0x8000 : sample * 0x7FFF;
+          view.setInt16(i * 2, intSample, true); // little-endian
+        }
+
+        debug('PCM 转换完成: ' + formatSize(pcmBuffer.byteLength) + ' (16kHz 16bit mono)');
+        debug('准备就绪，可以开始同传');
+
+        // Close temp audio context
+        audioCtx.close();
+      }).catch(function(err) {
+        debug('重采样失败: ' + err.message);
+        showToast('音频处理失败: ' + err.message, 'error');
+      });
+    }).catch(function(err) {
+      debug('解码失败: ' + err.message);
+      showToast('音频解码失败，请检查文件格式: ' + err.message, 'error');
+    });
   };
   reader.readAsArrayBuffer(file);
 }
@@ -495,42 +393,49 @@ function formatSize(bytes) {
 
 // ========== SHA256 签名 ==========
 async function generateSignature(appKey, appSecret, salt, timestamp) {
-  const signStr = `${appKey}${salt}${timestamp}${appSecret}`;
-  const encoder = new TextEncoder();
-  const data = encoder.encode(signStr);
-  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-  const hashArray = Array.from(new Uint8Array(hashBuffer));
-  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  var signStr = appKey + salt + timestamp + appSecret;
+  var encoder = new TextEncoder();
+  var data = encoder.encode(signStr);
+  var hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  var hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
 }
 
 // ========== 开始同传 ==========
 async function startTranslation() {
   if (isRunning) return;
 
-  const appKey = document.getElementById('appKey').value.trim();
-  const appSecret = document.getElementById('appSecret').value.trim();
+  var appKey = document.getElementById('appKey').value.trim();
+  var appSecret = document.getElementById('appSecret').value.trim();
 
   if (!appKey) { showToast('请输入 App Key', 'error'); return; }
   if (!appSecret) { showToast('请输入 App Secret', 'error'); return; }
-  if (!audioFile || !fileBuffer) { showToast('请选择音频文件', 'error'); return; }
+  if (!audioFile) { showToast('请选择音频文件', 'error'); return; }
+  if (!pcmBuffer) { showToast('音频正在解码中，请稍候', 'error'); return; }
 
-  // 重置状态
+  debug('========== 开始同传 ==========');
+  debug('语种: ' + langPair);
+
+  // Reset state
   fullTranscript = [];
   resultItems = [];
-  stats = { startedAt: Date.now(), segments: 0, bytesSent: 0 };
-  document.getElementById('resultsContainer').innerHTML = `
-    <div class="empty-state"><div class="icon">🎧</div><p>同传结果将实时显示在这里</p></div>
-  `;
+  document.getElementById('resultsContainer').innerHTML =
+    '<div class="empty-state"><div class="icon">🎧</div><p>同传结果将实时显示在这里</p></div>';
   document.getElementById('resultCount').textContent = '';
+  document.getElementById('btnDownload').disabled = true;
 
-  // 构建 WebSocket URL
-  const salt = crypto.randomUUID();
-  const timestamp = Math.floor(Date.now() / 1000);
-  const sign = await generateSignature(appKey, appSecret, salt, timestamp);
+  // Build WebSocket URL
+  var salt = crypto.randomUUID();
+  var timestamp = Math.floor(Date.now() / 1000);
+  var sign = await generateSignature(appKey, appSecret, salt, timestamp);
 
-  const wsUrl = `wss://openapi.youdao.com/stream-audio/stream-si?appKey=${encodeURIComponent(appKey)}&curtime=${timestamp}&salt=${encodeURIComponent(salt)}&sign=${sign}&speakerRequired=false&ttsRequired=false&resultType=entity&langPair=${encodeURIComponent(langPair)}`;
+  var wsUrl = 'wss://openapi.youdao.com/stream-audio/stream-si?appKey=' +
+    encodeURIComponent(appKey) + '&curtime=' + timestamp + '&salt=' +
+    encodeURIComponent(salt) + '&sign=' + sign +
+    '&speakerRequired=false&ttsRequired=false&resultType=entity&langPair=' +
+    encodeURIComponent(langPair);
 
-  console.log('Connecting to:', wsUrl);
+  debug('WS URL 已构建');
 
   setUIState('connecting');
   document.getElementById('overlayText').textContent = '正在连接有道同传服务...';
@@ -540,33 +445,35 @@ async function startTranslation() {
     ws = new WebSocket(wsUrl);
     ws.binaryType = 'arraybuffer';
 
-    ws.onopen = () => {
-      console.log('WebSocket connected');
-      setStatus('running', '已连接，正在发送音频数据...');
+    ws.onopen = function() {
+      debug('WebSocket 已连接');
+      setStatus('running', '已连接，等待 3 秒后开始发送音频...');
       document.getElementById('overlayText').textContent = '正在传输音频并等待识别...';
-
-      // 等待 3 秒后开始发送音频
       isRunning = true;
-      setTimeout(() => sendAudioChunks(), 3000);
+
+      // Wait 3s then send audio
+      setTimeout(function() {
+        sendAudioChunks();
+      }, 3000);
     };
 
-    ws.onmessage = (event) => {
+    ws.onmessage = function(event) {
       try {
-        const result = JSON.parse(event.data);
+        var result = JSON.parse(event.data);
         handleResult(result);
       } catch (e) {
-        console.log('Raw response:', event.data);
+        // ignore non-JSON messages
       }
     };
 
-    ws.onerror = (error) => {
-      console.error('WebSocket error:', error);
-      showToast('WebSocket 连接错误', 'error');
+    ws.onerror = function(error) {
+      debug('WebSocket 错误: ' + JSON.stringify(error));
+      showToast('WebSocket 连接错误，请查看控制台', 'error');
       resetState();
     };
 
-    ws.onclose = (event) => {
-      console.log('WebSocket closed:', event.code, event.reason);
+    ws.onclose = function(event) {
+      debug('WebSocket 关闭: code=' + event.code + ' reason=' + event.reason);
       if (isRunning) {
         setStatus('done', '同传完成');
         document.getElementById('overlay').classList.remove('active');
@@ -576,167 +483,202 @@ async function startTranslation() {
     };
 
   } catch (err) {
-    console.error('Connection error:', err);
+    debug('连接异常: ' + err.message);
     showToast('连接失败: ' + err.message, 'error');
     resetState();
   }
 }
 
-// ========== 分片发送音频 ==========
+// ========== 分片发送 PCM 音频 ==========
 async function sendAudioChunks() {
-  const chunkSize = 3200;
-  const frequency = 100; // ms between chunks (模拟 0.1s)
+  var chunkSize = 3200;
+  var frequency = 100; // ms
 
-  let offset = 0;
-  const totalBytes = fileBuffer.length;
+  var totalBytes = pcmBuffer.byteLength;
+  var dataView = new DataView(pcmBuffer);
+  var offset = 0;
+  var startTime = Date.now();
 
-  setStatus('running', `正在发送音频数据 (0/${formatSize(totalBytes)})...`);
+  debug('开始发送 PCM 数据: ' + formatSize(totalBytes) + ' (chunk=' + chunkSize + 'B, interval=' + frequency + 'ms)');
+  setStatus('running', '发送中... 0/' + formatSize(totalBytes));
 
-  // 直接使用 Uint8Array 分片发送
-  while (offset < fileBuffer.length && isRunning && ws && ws.readyState === WebSocket.OPEN) {
-    const end = Math.min(offset + chunkSize, fileBuffer.length);
-    const chunk = fileBuffer.slice(offset, end);
+  while (offset < totalBytes && isRunning && ws && ws.readyState === WebSocket.OPEN) {
+    var end = Math.min(offset + chunkSize, totalBytes);
+    // Create a proper ArrayBuffer slice for the chunk
+    var chunk = pcmBuffer.slice(offset, end);
 
     try {
-      ws.send(chunk.buffer);
-      stats.bytesSent += chunk.length;
+      ws.send(chunk);
       offset = end;
 
-      if (offset % (chunkSize * 10) === 0 || offset >= totalBytes) {
-        const pct = Math.round((offset / totalBytes) * 100);
-        setStatus('running', `发送中... ${formatSize(offset)} / ${formatSize(totalBytes)} (${pct}%)`);
+      if (offset % (chunkSize * 20) === 0 || offset >= totalBytes) {
+        var pct = Math.round((offset / totalBytes) * 100);
+        setStatus('running', '发送中... ' + formatSize(offset) + ' / ' + formatSize(totalBytes) + ' (' + pct + '%)');
       }
     } catch (e) {
-      console.error('Send error:', e);
+      debug('发送错误: ' + e.message);
       break;
     }
 
     await sleep(frequency);
   }
 
-  // 发送结束标记
+  var elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+  debug('PCM 数据发送完毕, 耗时 ' + elapsed + 's, 共 ' + formatSize(offset) + ' 字节');
+
+  // Send end marker
   if (ws && ws.readyState === WebSocket.OPEN) {
     ws.send(JSON.stringify({ end: true }));
-    console.log('Sent end marker');
-    setStatus('running', '音频发送完毕，等待最终结果...');
+    debug('已发送结束标记');
+    setStatus('running', '音频发送完毕，等待识别结果...');
     document.getElementById('overlay').classList.remove('active');
   }
 }
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise(function(resolve) { setTimeout(resolve, ms); });
 }
 
-// ========== 处理返回结果 ==========
+// ========== 处理返回结果 (根据真实 API 结构) ==========
 function handleResult(result) {
-  console.log('Result:', result);
+  // Ignore started/completed actions
+  if (result.action === 'started') {
+    debug('API: 会话已启动');
+    return;
+  }
+  if (result.action === 'completed') {
+    debug('API: 识别完成, isEnd=' + result.isEnd);
+    return;
+  }
+  if (result.errorCode && result.errorCode !== '0') {
+    debug('API 错误: code=' + result.errorCode + ' msg=' + (result.msg || ''));
+    return;
+  }
 
-  if (!result || !result.result || !Array.isArray(result.result)) return;
+  if (!result.result || !Array.isArray(result.result)) return;
 
-  // result.result 是数组，每个元素包含一条原文翻译对
-  for (const item of result.result) {
-    if (!item) continue;
+  for (var i = 0; i < result.result.length; i++) {
+    var item = result.result[i];
+    if (!item || !item.st) continue;
 
-    let srcText = '';
-    let tgtText = '';
+    // Real API structure:
+    // item.st.sentence = source text (原文)
+    // item.st.translation = target text (译文)
+    // item.st.partial = true/false (是否未完)
+    // item.st.type = 0 (stable) or 1 (partial)
+    // item.segId = segment ID
+    // item.st.from / item.st.to = language direction
 
-    // 提取原文 (st = source text)
-    if (item.st && item.st.sentence) {
-      srcText = item.st.sentence;
+    var segId = item.segId || 0;
+    var srcText = item.st.sentence || '';
+    var tgtText = item.st.translation || '';
+    var isStable = (item.st.type === 0);  // type=0 means stable/final
+    var isPartial = item.st.partial !== false;
+
+    if (!srcText) continue;
+
+    // Look for existing item by segId
+    var existingIdx = -1;
+    for (var j = 0; j < resultItems.length; j++) {
+      if (resultItems[j].segId === segId) {
+        existingIdx = j;
+        break;
+      }
     }
 
-    // 提取译文 (tgt = target)
-    if (item.tgt && item.tgt.sentence) {
-      tgtText = item.tgt.sentence;
-    }
-
-    if (!srcText && !tgtText) continue;
-
-    const segId = item.segId || Date.now();
-    const timestamp = new Date().toISOString();
-
-    // 避免重复
-    const existing = resultItems.find(r => r.segId === segId && r.stable);
-    if (existing) {
-      // 更新已有结果（可能是增量更新）
-      if (srcText) existing.src = srcText;
-      if (tgtText) existing.tgt = tgtText;
-      // 如果 status === 0，表示稳定结果
-      if (item.status === 0) {
+    if (existingIdx >= 0) {
+      // Update existing
+      var existing = resultItems[existingIdx];
+      existing.src = srcText;
+      existing.tgt = tgtText;
+      if (!existing.stable && isStable) {
         existing.stable = true;
-        if (!fullTranscript.find(t => t.segId === segId)) {
-          fullTranscript.push({ src: existing.src, tgt: existing.tgt, segId });
+        // Add to full transcript
+        var dup = false;
+        for (var k = 0; k < fullTranscript.length; k++) {
+          if (fullTranscript[k].segId === segId) { dup = true; break; }
+        }
+        if (!dup) {
+          fullTranscript.push({ src: srcText, tgt: tgtText, segId: segId });
         }
       }
       updateResultInDOM(existing);
-      continue;
+    } else {
+      // New segment
+      var record = {
+        segId: segId,
+        src: srcText,
+        tgt: tgtText,
+        stable: isStable,
+        timestamp: new Date().toISOString()
+      };
+      resultItems.push(record);
+
+      if (isStable) {
+        fullTranscript.push({ src: srcText, tgt: tgtText, segId: segId });
+      }
+
+      appendResultToDOM(record);
     }
-
-    const record = {
-      segId,
-      src: srcText,
-      tgt: tgtText,
-      stable: item.status === 0,
-      timestamp
-    };
-
-    resultItems.push(record);
-
-    if (record.stable) {
-      fullTranscript.push({ src: srcText, tgt: tgtText, segId });
-    }
-
-    appendResultToDOM(record);
-    stats.segments++;
   }
 
   updateResultCount();
 }
 
 function appendResultToDOM(record) {
-  const container = document.getElementById('resultsContainer');
+  var container = document.getElementById('resultsContainer');
 
-  // 移除空状态
-  const emptyState = container.querySelector('.empty-state');
+  // Remove empty state
+  var emptyState = container.querySelector('.empty-state');
   if (emptyState) emptyState.remove();
 
-  const div = document.createElement('div');
-  div.className = 'result-item';
-  div.id = `seg-${record.segId}`;
-  div.innerHTML = `
-    <div class="result-col">
-      <div class="result-label src">📢 原文</div>
-      <div class="result-text">${escapeHtml(record.src) || '<span class="pending">识别中...</span>'}</div>
-    </div>
-    <div class="result-col">
-      <div class="result-label tgt">🌐 译文</div>
-      <div class="result-text">${escapeHtml(record.tgt) || '<span class="pending">翻译中...</span>'}</div>
-    </div>
-  `;
+  var div = document.createElement('div');
+  div.className = 'result-item' + (record.stable ? ' stable' : '');
+  div.id = 'seg-' + record.segId;
+
+  var langNames = langPair.split(',');
+  var srcLabel = langNames[0];
+  var tgtLabel = langNames[1];
+
+  div.innerHTML =
+    '<div class="result-col">' +
+      '<div class="result-label src">📢 原文 (' + escapeHtml(srcLabel) + ')</div>' +
+      '<div class="result-text">' + escapeHtml(record.src) + '</div>' +
+    '</div>' +
+    '<div class="result-col">' +
+      '<div class="result-label tgt">🌐 译文 (' + escapeHtml(tgtLabel) + ')</div>' +
+      '<div class="result-text">' + (escapeHtml(record.tgt) || '<span class="pending">翻译中...</span>') + '</div>' +
+    '</div>';
+
   container.appendChild(div);
   container.scrollTop = container.scrollHeight;
 }
 
 function updateResultInDOM(record) {
-  const el = document.getElementById(`seg-${record.segId}`);
+  var el = document.getElementById('seg-' + record.segId);
   if (!el) return;
-  const texts = el.querySelectorAll('.result-text');
-  if (texts[0]) texts[0].innerHTML = escapeHtml(record.src) || '<span class="pending">识别中...</span>';
-  if (texts[1]) texts[1].innerHTML = escapeHtml(record.tgt) || '<span class="pending">翻译中...</span>';
+  var texts = el.querySelectorAll('.result-text');
+  if (texts[0]) texts[0].textContent = record.src;
+  if (texts[1]) texts[1].textContent = record.tgt || '';
+  if (record.stable) {
+    el.classList.add('stable');
+  }
+  var container = document.getElementById('resultsContainer');
+  container.scrollTop = container.scrollHeight;
 }
 
 function updateResultCount() {
-  const stable = fullTranscript.length;
-  document.getElementById('resultCount').textContent = `共 ${resultItems.length} 条 (稳定 ${stable} 条)`;
+  var total = resultItems.length;
+  var stable = fullTranscript.length;
+  document.getElementById('resultCount').textContent = '共 ' + total + ' 条 (稳定 ' + stable + ' 条)';
 }
 
 // ========== 停止同传 ==========
 function stopTranslation() {
+  debug('用户手动停止');
   if (ws) {
-    try {
-      ws.send(JSON.stringify({ end: true }));
-    } catch (e) {}
-    ws.close();
+    try { ws.send(JSON.stringify({ end: true })); } catch (e) {}
+    try { ws.close(); } catch (e) {}
     ws = null;
   }
   isRunning = false;
@@ -750,76 +692,66 @@ function downloadDoc() {
     return;
   }
 
-  // 生成简单 HTML = DOC 格式
-  const srcLangName = langPair.split(',')[0];
-  const tgtLangName = langPair.split(',')[1];
+  var langNames = langPair.split(',');
+  var srcLangName = langNames[0];
+  var tgtLangName = langNames[1];
 
-  const rows = fullTranscript.map(item => `
-    <tr>
-      <td style="padding:8px;border:1px solid #ccc;">${escapeHtml(item.src)}</td>
-      <td style="padding:8px;border:1px solid #ccc;">${escapeHtml(item.tgt)}</td>
-    </tr>
-  `).join('\n');
+  var rows = fullTranscript.map(function(item) {
+    return '<tr><td style="padding:8px;border:1px solid #ccc;">' +
+      escapeHtml(item.src) + '</td><td style="padding:8px;border:1px solid #ccc;">' +
+      escapeHtml(item.tgt) + '</td></tr>';
+  }).join('\n');
 
-  const html = `
-    <html xmlns:o="urn:schemas-microsoft-com:office:office"
-          xmlns:w="urn:schemas-microsoft-com:office:word"
-          xmlns="http://www.w3.org/TR/REC-html40">
-    <head><meta charset="UTF-8">
-    <style>
-      body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; padding: 20px; }
-      h1 { color: #1a1a2e; }
-      table { width: 100%; border-collapse: collapse; margin-top: 16px; }
-      th { background: #3b82f6; color: white; padding: 10px; }
-    </style></head>
-    <body>
-      <h1>🎙️ 有道同传转写结果</h1>
-      <p>语种: ${srcLangName} → ${tgtLangName}</p>
-      <p>时间: ${new Date().toLocaleString('zh-CN')}</p>
-      <p>共 ${fullTranscript.length} 条</p>
-      <table>
-        <tr><th style="padding:10px;">原文 (${srcLangName})</th><th style="padding:10px;">译文 (${tgtLangName})</th></tr>
-        ${rows}
-      </table>
-    </body></html>
-  `;
+  var html =
+    '<html xmlns:o="urn:schemas-microsoft-com:office:office" ' +
+    'xmlns:w="urn:schemas-microsoft-com:office:word" ' +
+    'xmlns="http://www.w3.org/TR/REC-html40">' +
+    '<head><meta charset="UTF-8">' +
+    '<style>body{font-family:"PingFang SC","Microsoft YaHei",sans-serif;padding:20px;}' +
+    'h1{color:#1a1a2e;}table{width:100%;border-collapse:collapse;margin-top:16px;}' +
+    'th{background:#3b82f6;color:white;padding:10px;}</style></head>' +
+    '<body>' +
+    '<h1>🎙️ 有道同传转写结果</h1>' +
+    '<p>语种: ' + escapeHtml(srcLangName) + ' → ' + escapeHtml(tgtLangName) + '</p>' +
+    '<p>时间: ' + new Date().toLocaleString('zh-CN') + '</p>' +
+    '<p>共 ' + fullTranscript.length + ' 条</p>' +
+    '<table><tr><th style="padding:10px;">原文 (' + escapeHtml(srcLangName) +
+    ')</th><th style="padding:10px;">译文 (' + escapeHtml(tgtLangName) + ')</th></tr>' +
+    rows + '</table></body></html>';
 
-  const blob = new Blob(['\ufeff' + html], { type: 'application/msword;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
+  var blob = new Blob(['\ufeff' + html], { type: 'application/msword;charset=utf-8' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
   a.href = url;
-  a.download = `同传转写_${new Date().toISOString().slice(0,10)}.doc`;
+  a.download = '同传转写_' + new Date().toISOString().slice(0,10) + '.doc';
   a.click();
   URL.revokeObjectURL(url);
-
   showToast('转写文件已下载', 'success');
 }
 
 // ========== UI 辅助 ==========
 function setStatus(state, text) {
-  const bar = document.getElementById('statusBar');
+  var bar = document.getElementById('statusBar');
   bar.className = 'status-bar ' + state;
   document.getElementById('statusText').textContent = text;
 }
 
 function setUIState(state) {
-  const startBtn = document.getElementById('btnStart');
-  const stopBtn = document.getElementById('btnStop');
-  const inputs = document.querySelectorAll('#configCard input, #configCard .lang-chip');
-  const fileInput = document.getElementById('audioFile');
+  var startBtn = document.getElementById('btnStart');
+  var stopBtn = document.getElementById('btnStop');
+  var inputs = document.querySelectorAll('#configCard input, #configCard .lang-chip');
+  var fileInput = document.getElementById('audioFile');
 
   if (state === 'connecting' || state === 'running') {
     startBtn.style.display = 'none';
     stopBtn.style.display = 'inline-flex';
-    inputs.forEach(el => el.style.pointerEvents = 'none');
-    inputs.forEach(el => el.style.opacity = '0.5');
+    inputs.forEach(function(el) { el.style.pointerEvents = 'none'; el.style.opacity = '0.5'; });
     fileInput.disabled = true;
     document.getElementById('btnDownload').disabled = true;
   } else {
     startBtn.style.display = 'inline-flex';
     stopBtn.style.display = 'none';
-    inputs.forEach(el => el.style.pointerEvents = 'auto');
-    inputs.forEach(el => el.style.opacity = '1');
+    inputs.forEach(function(el) { el.style.pointerEvents = 'auto'; el.style.opacity = '1'; });
     fileInput.disabled = false;
   }
 }
@@ -838,15 +770,15 @@ function resetState() {
 }
 
 function showToast(message, type) {
-  const toast = document.getElementById('toast');
+  var toast = document.getElementById('toast');
   toast.textContent = message;
   toast.className = 'toast ' + type + ' show';
-  setTimeout(() => { toast.className = 'toast'; }, 3000);
+  setTimeout(function() { toast.className = 'toast'; }, 3000);
 }
 
 function escapeHtml(text) {
   if (!text) return '';
-  const div = document.createElement('div');
+  var div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
 }
