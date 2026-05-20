@@ -433,7 +433,7 @@ async function startTranslation() {
     encodeURIComponent(appKey) + '&curtime=' + timestamp + '&salt=' +
     encodeURIComponent(salt) + '&sign=' + sign +
     '&speakerRequired=false&ttsRequired=false&resultType=entity&langPair=' +
-    encodeURIComponent(langPair);
+    langPair;
 
   debug('WS URL 已构建');
 
