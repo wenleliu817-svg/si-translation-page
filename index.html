@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>有道同传 - 实时语音翻译</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-muted: #94a3b8;
+    --primary: #3b82f6;
+    --primary-hover: #2563eb;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --radius: 12px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 20px;
+  }
+
+  header {
+    text-align: center;
+    padding: 32px 0 24px;
+  }
+  header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header p {
+    color: var(--text-muted);
+    margin-top: 6px;
+    font-size: 14px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-title .icon { font-size: 20px; }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .form-group { display: flex; flex-direction: column; gap: 6px; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+  }
+  .form-group input, .form-group select, .form-group textarea {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  .form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.15);
+  }
+  .form-group input:disabled, .form-group select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .lang-selector {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .lang-chip {
+    padding: 8px 18px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: var(--bg);
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .lang-chip:hover { border-color: var(--primary); color: var(--text); }
+  .lang-chip.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+  }
+
+  .file-upload {
+    position: relative;
+  }
+  .file-upload input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  .file-upload-area {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    text-align: center;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .file-upload-area:hover, .file-upload-area.has-file {
+    border-color: var(--primary);
+    background: rgba(59,130,246,0.05);
+  }
+  .file-upload-area .upload-icon { font-size: 36px; margin-bottom: 8px; }
+  .file-upload-area .upload-text { color: var(--text-muted); font-size: 13px; }
+  .file-upload-area .file-name {
+    color: var(--primary);
+    font-weight: 500;
+    margin-top: 4px;
+    font-size: 13px;
+  }
+  .file-upload-area .file-size { color: var(--text-muted); font-size: 12px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+  }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .btn-primary { background: var(--primary); color: #fff; }
+  .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-secondary:hover:not(:disabled) { background: var(--border); }
+  .btn-success { background: var(--success); color: #000; }
+  .btn-success:hover:not(:disabled) { opacity: 0.85; }
+  .btn-danger { background: var(--danger); color: #fff; }
+
+  .btn-row {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  /* Status */
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .status-bar.idle { background: var(--border); color: var(--text-muted); }
+  .status-bar.connecting { background: rgba(245,158,11,0.15); color: var(--warning); }
+  .status-bar.running { background: rgba(59,130,246,0.15); color: var(--primary); }
+  .status-bar.done { background: rgba(34,197,94,0.15); color: var(--success); }
+  .status-bar.error { background: rgba(239,68,68,0.15); color: var(--danger); }
+
+  .spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid currentColor;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+  .status-bar.running .spinner, .status-bar.connecting .spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Results */
+  .results-container {
+    max-height: 500px;
+    overflow-y: auto;
+    border-radius: var(--radius);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 12px;
+  }
+  .result-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+    animation: fadeIn 0.3s ease;
+  }
+  .result-item:last-child { border-bottom: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  .result-col {
+    flex: 1;
+    min-width: 0;
+  }
+  .result-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .result-label.src { color: var(--primary); }
+  .result-label.tgt { color: var(--success); }
+  .result-text {
+    font-size: 14px;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+  .result-text.pending { color: var(--text-muted); font-style: italic; }
+
+  .empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  .empty-state .icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
+
+  /* Loading overlay */
+  .overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15,23,42,0.8);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .overlay.active { display: flex; }
+  .overlay .loader {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  .overlay .text { color: var(--text-muted); font-size: 14px; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    z-index: 200;
+    animation: slideDown 0.3s ease;
+    display: none;
+  }
+  .toast.show { display: block; }
+  .toast.success { background: var(--success); color: #000; }
+  .toast.error { background: var(--danger); color: #fff; }
+  @keyframes slideDown { from { opacity: 0; transform: translateX(-50%) translateY(-20px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+
+  /* Hidden audio playback for testing */
+  .audio-preview { margin-top: 8px; }
+  .audio-preview audio { width: 100%; margin-top: 6px; }
+
+  @media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .btn-row { flex-direction: column; }
+    .btn-row .btn { width: 100%; }
+    .result-item { flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>🎙️ 有道同传</h1>
+    <p>实时语音翻译 · 基于有道智云 Stream SI API</p>
+  </header>
+
+  <!-- Configuration -->
+  <div class="card" id="configCard">
+    <div class="card-title"><span class="icon">⚙️</span> 配置信息</div>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>App Key（应用ID）</label>
+        <input type="text" id="appKey" placeholder="请输入 App Key" />
+      </div>
+      <div class="form-group">
+        <label>App Secret（应用密钥）</label>
+        <input type="password" id="appSecret" placeholder="请输入 App Secret" />
+      </div>
+      <div class="form-group full">
+        <label>语种选择</label>
+        <div class="lang-selector" id="langSelector">
+          <div class="lang-chip active" data-lang="ja,zh-CHS">日中互译</div>
+          <div class="lang-chip" data-lang="zh-CHS,ja">中日互译</div>
+          <div class="lang-chip" data-lang="en,zh-CHS">英中互译</div>
+          <div class="lang-chip" data-lang="zh-CHS,en">中英互译</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audio Upload -->
+  <div class="card" id="uploadCard">
+    <div class="card-title"><span class="icon">📁</span> 上传音频</div>
+    <div class="file-upload">
+      <input type="file" id="audioFile" accept=".mp3,.wav,audio/mpeg,audio/wav,audio/x-wav" />
+      <div class="file-upload-area" id="uploadArea">
+        <div class="upload-icon">🎵</div>
+        <div class="upload-text">点击选择音频文件，支持 MP3 / WAV 格式</div>
+        <div class="file-name" id="fileName" style="display:none"></div>
+        <div class="file-size" id="fileSize" style="display:none"></div>
+      </div>
+    </div>
+    <div class="audio-preview" id="audioPreview" style="display:none"></div>
+  </div>
+
+  <!-- Actions -->
+  <div class="btn-row">
+    <button class="btn btn-primary" id="btnStart" onclick="startTranslation()">
+      ▶️ 开始同传
+    </button>
+    <button class="btn btn-danger" id="btnStop" onclick="stopTranslation()" style="display:none">
+      ⏹️ 停止
+    </button>
+    <button class="btn btn-success" id="btnDownload" onclick="downloadDoc()" disabled>
+      📥 下载完整转写 (DOC)
+    </button>
+  </div>
+
+  <!-- Status -->
+  <div class="status-bar idle" id="statusBar">
+    <span class="spinner"></span>
+    <span id="statusText">准备就绪，请配置并开始同传</span>
+  </div>
+
+  <!-- Results -->
+  <div class="card" id="resultsCard">
+    <div class="card-title">
+      <span class="icon">📝</span> 识别结果
+      <span id="resultCount" style="font-size:12px; color:var(--text-muted); margin-left:auto;"></span>
+    </div>
+    <div class="results-container" id="resultsContainer">
+      <div class="empty-state">
+        <div class="icon">🎧</div>
+        <p>同传结果将实时显示在这里</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="loader"></div>
+  <div class="text" id="overlayText">正在处理中...</div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ========== 全局状态 ==========
+let ws = null;
+let isRunning = false;
+let audioFile = null;
+let fileBuffer = null;
+let fullTranscript = [];
+let resultItems = [];
+let langPair = 'ja,zh-CHS';
+let stats = { startedAt: null, segments: 0, bytesSent: 0 };
+
+// ========== 初始化 ==========
+document.addEventListener('DOMContentLoaded', () => {
+  const langChips = document.querySelectorAll('.lang-chip');
+  langChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      langChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      langPair = chip.dataset.lang;
+    });
+  });
+
+  const fileInput = document.getElementById('audioFile');
+  fileInput.addEventListener('change', handleFileSelect);
+
+  const uploadArea = document.getElementById('uploadArea');
+  uploadArea.addEventListener('dragover', e => {
+    e.preventDefault();
+    uploadArea.style.borderColor = 'var(--primary)';
+  });
+  uploadArea.addEventListener('dragleave', () => {
+    uploadArea.style.borderColor = 'var(--border)';
+  });
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.style.borderColor = 'var(--border)';
+    if (e.dataTransfer.files.length > 0) {
+      fileInput.files = e.dataTransfer.files;
+      handleFileSelect({ target: fileInput });
+    }
+  });
+});
+
+// ========== 文件选择 ==========
+function handleFileSelect(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const validTypes = ['audio/mpeg', 'audio/mp3', 'audio/wav', 'audio/x-wav', 'audio/wave'];
+  const validExts = ['.mp3', '.wav'];
+
+  const ext = '.' + file.name.split('.').pop().toLowerCase();
+  if (!validTypes.includes(file.type) && !validExts.includes(ext)) {
+    showToast('请选择 MP3 或 WAV 格式的音频文件', 'error');
+    return;
+  }
+
+  audioFile = file;
+
+  // 读取为 ArrayBuffer
+  const reader = new FileReader();
+  reader.onload = () => {
+    fileBuffer = new Uint8Array(reader.result);
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileName').style.display = 'block';
+    document.getElementById('fileSize').textContent = formatSize(file.size);
+    document.getElementById('fileSize').style.display = 'block';
+    document.getElementById('uploadArea').classList.add('has-file');
+
+    // 音频预览
+    const preview = document.getElementById('audioPreview');
+    preview.style.display = 'block';
+    const blobUrl = URL.createObjectURL(file);
+    preview.innerHTML = `<audio controls src="${blobUrl}"></audio>`;
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function formatSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+}
+
+// ========== SHA256 签名 ==========
+async function generateSignature(appKey, appSecret, salt, timestamp) {
+  const signStr = `${appKey}${salt}${timestamp}${appSecret}`;
+  const encoder = new TextEncoder();
+  const data = encoder.encode(signStr);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+}
+
+// ========== 开始同传 ==========
+async function startTranslation() {
+  if (isRunning) return;
+
+  const appKey = document.getElementById('appKey').value.trim();
+  const appSecret = document.getElementById('appSecret').value.trim();
+
+  if (!appKey) { showToast('请输入 App Key', 'error'); return; }
+  if (!appSecret) { showToast('请输入 App Secret', 'error'); return; }
+  if (!audioFile || !fileBuffer) { showToast('请选择音频文件', 'error'); return; }
+
+  // 重置状态
+  fullTranscript = [];
+  resultItems = [];
+  stats = { startedAt: Date.now(), segments: 0, bytesSent: 0 };
+  document.getElementById('resultsContainer').innerHTML = `
+    <div class="empty-state"><div class="icon">🎧</div><p>同传结果将实时显示在这里</p></div>
+  `;
+  document.getElementById('resultCount').textContent = '';
+
+  // 构建 WebSocket URL
+  const salt = crypto.randomUUID();
+  const timestamp = Math.floor(Date.now() / 1000);
+  const sign = await generateSignature(appKey, appSecret, salt, timestamp);
+
+  const wsUrl = `wss://openapi.youdao.com/stream-audio/stream-si?appKey=${encodeURIComponent(appKey)}&curtime=${timestamp}&salt=${encodeURIComponent(salt)}&sign=${sign}&speakerRequired=false&ttsRequired=false&resultType=entity&langPair=${encodeURIComponent(langPair)}`;
+
+  console.log('Connecting to:', wsUrl);
+
+  setUIState('connecting');
+  document.getElementById('overlayText').textContent = '正在连接有道同传服务...';
+  document.getElementById('overlay').classList.add('active');
+
+  try {
+    ws = new WebSocket(wsUrl);
+    ws.binaryType = 'arraybuffer';
+
+    ws.onopen = () => {
+      console.log('WebSocket connected');
+      setStatus('running', '已连接，正在发送音频数据...');
+      document.getElementById('overlayText').textContent = '正在传输音频并等待识别...';
+
+      // 等待 3 秒后开始发送音频
+      isRunning = true;
+      setTimeout(() => sendAudioChunks(), 3000);
+    };
+
+    ws.onmessage = (event) => {
+      try {
+        const result = JSON.parse(event.data);
+        handleResult(result);
+      } catch (e) {
+        console.log('Raw response:', event.data);
+      }
+    };
+
+    ws.onerror = (error) => {
+      console.error('WebSocket error:', error);
+      showToast('WebSocket 连接错误', 'error');
+      resetState();
+    };
+
+    ws.onclose = (event) => {
+      console.log('WebSocket closed:', event.code, event.reason);
+      if (isRunning) {
+        setStatus('done', '同传完成');
+        document.getElementById('overlay').classList.remove('active');
+        document.getElementById('btnDownload').disabled = (fullTranscript.length === 0);
+        resetUIState();
+      }
+    };
+
+  } catch (err) {
+    console.error('Connection error:', err);
+    showToast('连接失败: ' + err.message, 'error');
+    resetState();
+  }
+}
+
+// ========== 分片发送音频 ==========
+async function sendAudioChunks() {
+  const chunkSize = 3200;
+  const frequency = 100; // ms between chunks (模拟 0.1s)
+
+  let offset = 0;
+  const totalBytes = fileBuffer.length;
+
+  setStatus('running', `正在发送音频数据 (0/${formatSize(totalBytes)})...`);
+
+  // 直接使用 Uint8Array 分片发送
+  while (offset < fileBuffer.length && isRunning && ws && ws.readyState === WebSocket.OPEN) {
+    const end = Math.min(offset + chunkSize, fileBuffer.length);
+    const chunk = fileBuffer.slice(offset, end);
+
+    try {
+      ws.send(chunk.buffer);
+      stats.bytesSent += chunk.length;
+      offset = end;
+
+      if (offset % (chunkSize * 10) === 0 || offset >= totalBytes) {
+        const pct = Math.round((offset / totalBytes) * 100);
+        setStatus('running', `发送中... ${formatSize(offset)} / ${formatSize(totalBytes)} (${pct}%)`);
+      }
+    } catch (e) {
+      console.error('Send error:', e);
+      break;
+    }
+
+    await sleep(frequency);
+  }
+
+  // 发送结束标记
+  if (ws && ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ end: true }));
+    console.log('Sent end marker');
+    setStatus('running', '音频发送完毕，等待最终结果...');
+    document.getElementById('overlay').classList.remove('active');
+  }
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// ========== 处理返回结果 ==========
+function handleResult(result) {
+  console.log('Result:', result);
+
+  if (!result || !result.result || !Array.isArray(result.result)) return;
+
+  // result.result 是数组，每个元素包含一条原文翻译对
+  for (const item of result.result) {
+    if (!item) continue;
+
+    let srcText = '';
+    let tgtText = '';
+
+    // 提取原文 (st = source text)
+    if (item.st && item.st.sentence) {
+      srcText = item.st.sentence;
+    }
+
+    // 提取译文 (tgt = target)
+    if (item.tgt && item.tgt.sentence) {
+      tgtText = item.tgt.sentence;
+    }
+
+    if (!srcText && !tgtText) continue;
+
+    const segId = item.segId || Date.now();
+    const timestamp = new Date().toISOString();
+
+    // 避免重复
+    const existing = resultItems.find(r => r.segId === segId && r.stable);
+    if (existing) {
+      // 更新已有结果（可能是增量更新）
+      if (srcText) existing.src = srcText;
+      if (tgtText) existing.tgt = tgtText;
+      // 如果 status === 0，表示稳定结果
+      if (item.status === 0) {
+        existing.stable = true;
+        if (!fullTranscript.find(t => t.segId === segId)) {
+          fullTranscript.push({ src: existing.src, tgt: existing.tgt, segId });
+        }
+      }
+      updateResultInDOM(existing);
+      continue;
+    }
+
+    const record = {
+      segId,
+      src: srcText,
+      tgt: tgtText,
+      stable: item.status === 0,
+      timestamp
+    };
+
+    resultItems.push(record);
+
+    if (record.stable) {
+      fullTranscript.push({ src: srcText, tgt: tgtText, segId });
+    }
+
+    appendResultToDOM(record);
+    stats.segments++;
+  }
+
+  updateResultCount();
+}
+
+function appendResultToDOM(record) {
+  const container = document.getElementById('resultsContainer');
+
+  // 移除空状态
+  const emptyState = container.querySelector('.empty-state');
+  if (emptyState) emptyState.remove();
+
+  const div = document.createElement('div');
+  div.className = 'result-item';
+  div.id = `seg-${record.segId}`;
+  div.innerHTML = `
+    <div class="result-col">
+      <div class="result-label src">📢 原文</div>
+      <div class="result-text">${escapeHtml(record.src) || '<span class="pending">识别中...</span>'}</div>
+    </div>
+    <div class="result-col">
+      <div class="result-label tgt">🌐 译文</div>
+      <div class="result-text">${escapeHtml(record.tgt) || '<span class="pending">翻译中...</span>'}</div>
+    </div>
+  `;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function updateResultInDOM(record) {
+  const el = document.getElementById(`seg-${record.segId}`);
+  if (!el) return;
+  const texts = el.querySelectorAll('.result-text');
+  if (texts[0]) texts[0].innerHTML = escapeHtml(record.src) || '<span class="pending">识别中...</span>';
+  if (texts[1]) texts[1].innerHTML = escapeHtml(record.tgt) || '<span class="pending">翻译中...</span>';
+}
+
+function updateResultCount() {
+  const stable = fullTranscript.length;
+  document.getElementById('resultCount').textContent = `共 ${resultItems.length} 条 (稳定 ${stable} 条)`;
+}
+
+// ========== 停止同传 ==========
+function stopTranslation() {
+  if (ws) {
+    try {
+      ws.send(JSON.stringify({ end: true }));
+    } catch (e) {}
+    ws.close();
+    ws = null;
+  }
+  isRunning = false;
+  resetState();
+}
+
+// ========== 下载 DOC ==========
+function downloadDoc() {
+  if (fullTranscript.length === 0) {
+    showToast('没有可下载的转写结果', 'error');
+    return;
+  }
+
+  // 生成简单 HTML = DOC 格式
+  const srcLangName = langPair.split(',')[0];
+  const tgtLangName = langPair.split(',')[1];
+
+  const rows = fullTranscript.map(item => `
+    <tr>
+      <td style="padding:8px;border:1px solid #ccc;">${escapeHtml(item.src)}</td>
+      <td style="padding:8px;border:1px solid #ccc;">${escapeHtml(item.tgt)}</td>
+    </tr>
+  `).join('\n');
+
+  const html = `
+    <html xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:w="urn:schemas-microsoft-com:office:word"
+          xmlns="http://www.w3.org/TR/REC-html40">
+    <head><meta charset="UTF-8">
+    <style>
+      body { font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; padding: 20px; }
+      h1 { color: #1a1a2e; }
+      table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+      th { background: #3b82f6; color: white; padding: 10px; }
+    </style></head>
+    <body>
+      <h1>🎙️ 有道同传转写结果</h1>
+      <p>语种: ${srcLangName} → ${tgtLangName}</p>
+      <p>时间: ${new Date().toLocaleString('zh-CN')}</p>
+      <p>共 ${fullTranscript.length} 条</p>
+      <table>
+        <tr><th style="padding:10px;">原文 (${srcLangName})</th><th style="padding:10px;">译文 (${tgtLangName})</th></tr>
+        ${rows}
+      </table>
+    </body></html>
+  `;
+
+  const blob = new Blob(['\ufeff' + html], { type: 'application/msword;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `同传转写_${new Date().toISOString().slice(0,10)}.doc`;
+  a.click();
+  URL.revokeObjectURL(url);
+
+  showToast('转写文件已下载', 'success');
+}
+
+// ========== UI 辅助 ==========
+function setStatus(state, text) {
+  const bar = document.getElementById('statusBar');
+  bar.className = 'status-bar ' + state;
+  document.getElementById('statusText').textContent = text;
+}
+
+function setUIState(state) {
+  const startBtn = document.getElementById('btnStart');
+  const stopBtn = document.getElementById('btnStop');
+  const inputs = document.querySelectorAll('#configCard input, #configCard .lang-chip');
+  const fileInput = document.getElementById('audioFile');
+
+  if (state === 'connecting' || state === 'running') {
+    startBtn.style.display = 'none';
+    stopBtn.style.display = 'inline-flex';
+    inputs.forEach(el => el.style.pointerEvents = 'none');
+    inputs.forEach(el => el.style.opacity = '0.5');
+    fileInput.disabled = true;
+    document.getElementById('btnDownload').disabled = true;
+  } else {
+    startBtn.style.display = 'inline-flex';
+    stopBtn.style.display = 'none';
+    inputs.forEach(el => el.style.pointerEvents = 'auto');
+    inputs.forEach(el => el.style.opacity = '1');
+    fileInput.disabled = false;
+  }
+}
+
+function resetUIState() {
+  setUIState('idle');
+  document.getElementById('overlay').classList.remove('active');
+}
+
+function resetState() {
+  isRunning = false;
+  ws = null;
+  setUIState('idle');
+  document.getElementById('overlay').classList.remove('active');
+  document.getElementById('btnDownload').disabled = (fullTranscript.length === 0);
+}
+
+function showToast(message, type) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast ' + type + ' show';
+  setTimeout(() => { toast.className = 'toast'; }, 3000);
+}
+
+function escapeHtml(text) {
+  if (!text) return '';
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+</script>
+</body>
+</html>
